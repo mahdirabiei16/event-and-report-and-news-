@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ایجاد حساب کاربری</title>
+<link rel="stylesheet" href="./styleligin.css">
+  
+</head>
+<style>:root {
+        --set1:#0A0A44;
+        --set2:#0D0D5C;
+        --set3:#111178;
+        --set4:#14148F;
+        --set5:#1818AB;
+        --text:#FFFFFF;
+        --terxt2:#000000;
+        --color1:#FFC801;
+        --color2:#EDBE13;
+        --error:#D92D20;
+}       
+
+    body {
+      margin: 0;
+      font-family: "IRANSans", sans-serif;
+      background: var(--set1); /* پس‌زمینه تیره‌تر و دقیق‌تر */
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 32px 22px;
+    }
+
+    /* لوگو */
+    .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    *,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+    h1 {
+      text-align: center;
+      font-size: 1.45rem;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 0.9rem;
+      color:var(--text);
+      margin-bottom: 32px;
+    }
+
+    /* فیلدها */
+    .label {
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      display: block;
+      color:var(--text);
+    }
+
+    .input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--set3);
+      background: var(--set2);
+      color:var(--text);
+      font-size: 1rem;
+      margin-bottom: 18px;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    .input:focus {
+      border-color: var(--color1);
+      
+    }
+
+    /* ردیف فراموشی رمز + یادآوری */
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: var(--text);
+    }
+
+    .remember input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--color1);
+      color: var(--set2);
+    }
+
+    .forgot {
+      font-size: 0.85rem;
+      color: var(--color1);
+      text-decoration: none;
+    }
+
+    /* دکمه‌ها */
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 16px;
+      transition: 0.15s;
+    }
+
+    .btn-primary {
+        font-family: "IRANSans", sans-serif;
+      background: var(--color2);
+      color: #000000;
+     
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #ffe08a, #ffc46b);
+      transform: translateY(-1px);
+    }
+
+    .btn-google {
+        font-family: "IRANSans", sans-serif;
+      background: var(--set2);
+      color: #fffefe;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+    }
+  
+    .google-icon {
+        font-family: "IRANSans", sans-serif;
+      width: 18px;
+      height: 18px;
+      border-radius: 2px;
+      background: conic-gradient(
+        from 0deg,
+        #4285f4 0deg 90deg,
+        #34a853 90deg 180deg,
+        #fbbc05 180deg 270deg,
+        #ea4335 270deg 360deg
+      );
+    }
+
+    /* فوتر */
+    .footer {
+      text-align: center;
+      margin-top: auto;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .footer a {
+      color: #ffd86b;
+      text-decoration: none;
+      font-weight: 600;
+      margin-right: 4px;
+    }
+      .ooter {
+        text-align: center;
+        margin-top: 5px;
+      color: var(--text);
+    }
+    .ooter a{
+      color: var(--color1);
+    }
+    /* Chrome, Safari, Edge, Opera */
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.no-spinner {
+  -moz-appearance: textfield;
+}
+
+</style>
+<body>
+
+  <div class="logo "><img src="./logo 1.png" alt=""></div>
+
+  <h1>ایجاد حساب کاربری </h1>
+  <p class="subtitle">لطفا اطلاعات خواسته شده را وارد کنید</p>
+
+  <label class="label ">موبایل</label>
+  <input type="number" class="input no-spinner" placeholder="09000000000" />
+
+  <label class="label">نام و نام خانودگی </label>
+  <input type="text" class="input" placeholder="••••••••" />
+
+  <label class="label">رمز عبور </label>
+  <input type="password" class="input" placeholder="••••••••" />
+  
+  <label class="label">تکرار رمز عبور</label>
+  <input type="password" class="input" placeholder="••••••••" />
+  <div class="row">
+    <label class="remember">
+      <input type="checkbox" />
+      <span>تا ۳۰ روز منو به خاطر بسپار</span>
+    </label>
+
+    <a href="#" class="forgot"></a>
+  </div>
+
+  <button class="btn btn-primary" onclick="location.href='./guide.html'">ورود</button>
+
+
+
+   <div class="ooter">
+    <span>آیا قبلا حساب داشته‌اید؟</span>
+    <a href="./login.html">ورود</a>
+  </div>
+
+</body>
+</html>

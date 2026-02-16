@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>گزارشات شهری - قم من</title>
+    <link rel="stylesheet" href="./stylegozareshersal.css">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    
+    <style>
+        /* استایل‌های مربوط به مودال نقشه */
+        .map-modal {
+            display: none; /* مخفی به صورت پیش‌فرض */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            flex-direction: column;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            width: 90%;
+            height: 80%;
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .modal-header {
+            padding: 15px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .close-modal {
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #888;
+            background: none;
+            border: none;
+        }
+
+        #map {
+            flex: 1;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .modal-footer {
+            padding: 15px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .confirm-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* استایل برای نشانگر روی نقشه */
+        .leaflet-container {
+            font-family: 'Tahoma', sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar - Menu button and logo -->
+    <div class="top-nav">
+        <button class="menu-btn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+            </svg>
+        </button>
+        <div class="app-title" onclick="location.href='./main.html'">
+            <span>شهرینو</span>
+            <svg class="app-logo" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <img src="./logo 1.png" alt="">
+            </svg>
+        </div>
+    </div>
+
+    <!-- Secondary Header - Back button and page title -->
+    <div class="secondary-header">
+        <button class="back-btn" onclick="history.back()">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+        </button>
+        <h1 class="page-title">گزارشات شهری</h1>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        
+        <!-- Upload Card Section - Image upload area -->
+        <div class="upload-card" onclick="document.getElementById('fileInput').click()">
+            <input type="file" id="fileInput" class="file-input" accept="image/*" onchange="handleFileSelect(event)">
+            <img id="previewImage" class="preview-image" alt="Preview">
+            <svg id="uploadIcon" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="white" class="bi bi-image" viewBox="0 0 16 16">
+                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z"/>
+            </svg>
+            <p id="uploadText" class="upload-text">لطفا تصویر خود را بارگذاری کنید</p>
+            <button id="uploadBtn" class="upload-btn">اپلود کردن</button>
+        </div>
+
+        <!-- Description Section - Text input -->
+        <div class="description-section">
+            <label class="section-label">توضیحات خود</label>
+            <div class="description-card">
+                <textarea class="description-input" placeholder="مثال : ترکیدگی لوله آب در خیابان ..." rows="3"></textarea>
+            </div>
+        </div>
+
+        <!-- Location Section - Map location picker -->
+        <div class="location-section">
+            <label class="section-label">ارسال مکان گزارش</label>
+            <!-- این بخش کلیک خور شد تا مودال نقشه را باز کند -->
+            <div class="location-card" id="openMapBtn">
+                <svg class="location-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <p class="location-text" id="locationText">برای ارسال کردن کلیک کنید</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Submit Button Section -->
+    <div class="submit-section">
+        <button class="btn-submit">ارسال گزارش</button>
+    </div>
+
+    <!-- Map Modal Structure -->
+    <div id="mapModal" class="map-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>انتخاب موقعیت روی نقشه</h3>
+                <button class="close-modal" id="closeModalBtn">&times;</button>
+            </div>
+            <div id="map"></div>
+            <div class="modal-footer">
+                <button class="confirm-btn" id="confirmLocationBtn">تایید موقعیت</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script>
+        // File upload functionality
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewImage = document.getElementById('previewImage');
+                    const uploadIcon = document.getElementById('uploadIcon');
+                    const uploadText = document.getElementById('uploadText');
+                    const uploadBtn = document.getElementById('uploadBtn');
+                    
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                    uploadIcon.style.display = 'none';
+                    uploadText.style.display = 'none';
+                    uploadBtn.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // ---------------------------------------------
+        // Map Functionality Logic
+        // ---------------------------------------------
+        
+        const mapModal = document.getElementById('mapModal');
+        const openMapBtn = document.getElementById('openMapBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const confirmLocationBtn = document.getElementById('confirmLocationBtn');
+        const locationText = document.getElementById('locationText');
+        
+        let map;
+        let marker;
+        let selectedLatLng = null;
+
+        // باز کردن مودال نقشه
+        openMapBtn.addEventListener('click', function() {
+            mapModal.style.display = 'flex';
+            
+            // اگر نقشه قبلاً ساخته نشده، آن را بساز (تنها یک بار)
+            if (!map) {
+                // مرکز نقشه قم با زوم مناسب
+                map = L.map('map').setView([34.6401, 50.8764], 13);
+
+                // لود لایه تایلهای OpenStreetMap
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap contributors'
+                }).addTo(map);
+            }
+            
+            // حل مشکل نمایش ناقص نقشه هنگام باز شدن در div مخفی
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 100);
+        });
+
+        // بستن مودال با دکمه ضربدر
+        closeModalBtn.addEventListener('click', function() {
+            mapModal.style.display = 'none';
+        });
+
+        // بستن مودال با کلیک بیرون محتوای مودال (روی پس‌زمینه تیره)
+        window.addEventListener('click', function(event) {
+            if (event.target == mapModal) {
+                mapModal.style.display = 'none';
+            }
+        });
+
+        // رویداد کلیک روی نقشه برای اضافه کردن نشانگر
+        function onMapClick(e) {
+            selectedLatLng = e.latlng;
+
+            // اگر نشانگر قبلاً وجود دارد، جابجایش کن
+            if (marker) {
+                marker.setLatLng(e.latlng);
+            } else {
+                // ساخت نشانگر جدید قابل درگ (جابجایی)
+                marker = L.marker(e.latlng, {draggable: true}).addTo(map);
+                
+                // به‌روزرسانی مختصات اگر کاربر نشانگر را بکشد
+                marker.on('dragend', function(e) {
+                    selectedLatLng = marker.getLatLng();
+                });
+            }
+        }
+
+        // متصل کردن رویداد کلیک به نقشه
+        // (چون map در شرط if بالا تعریف می‌شود، باید این خط را پس از ساخت map اجرا کرد یا به صورت داینامیک اضافه کرد)
+        // برای سادگی، رویداد را داخل شرط ساخت map اضافه می‌کنیم یا با delegate حل می‌کنیم.
+        // روش صحیح‌تر:
+        document.getElementById('openMapBtn').addEventListener('click', function attachMapEvents() {
+            // فقط یک بار این رویداد متصل شود
+            if(map && !map.hasEventListeners('click')) {
+                map.on('click', onMapClick);
+            }
+        });
+
+        // تایید موقعیت و بستن پنجره
+        confirmLocationBtn.addEventListener('click', function() {
+            if (selectedLatLng) {
+                const lat = selectedLatLng.lat.toFixed(5);
+                const lng = selectedLatLng.lng.toFixed(5);
+                locationText.innerText = `موقعیت انتخاب شد: ${lat}, ${lng}`;
+                locationText.style.color = "#4CAF50"; // تغییر رنگ به سبز
+                mapModal.style.display = 'none';
+            } else {
+                alert("لطفا ابتدا روی نقشه کلیک کنید تا موقعیت را انتخاب نمایید.");
+            }
+        });
+
+
+
+
+
+    </script>
+<script>
+
+               // ========== وقتی صفحه کاملاً بارگذاری شد ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // ========== تنظیمات اولیه ==========
+            let menuOpen = false;
+
+            // ========== ایجاد منوی کشویی ==========
+            const createSideMenu = () => {
+                // ایجاد المان منوی کشویی
+                const sideMenu = document.createElement('div');
+                sideMenu.id = 'sideMenu';
+                sideMenu.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    right: -250px;
+                    width: 250px;
+                    height: 100vh;
+                    background-color: var(--set2);
+                    transition: right 0.3s ease;
+                    z-index: 1000;
+                    box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+                `;
+
+                // محتوای منو
+                sideMenu.innerHTML = `
+                    <div style="padding: 20px;">
+                        <h3 style="color: var(--text); margin-bottom: 30px;">منوی اصلی</h3>
+                        <ul style="list-style: none;">
+                            <li style="margin-bottom: 15px;">
+                                <a href="./main.html" style="color: var(--color1); text-decoration: none; font-size: 16px;">صفحه اصلی</a>
+                            </li>
+
+                            <li style="margin-bottom: 15px;">
+                                <a  style="color: var(--color1); text-decoration: none; font-size: 16px;" onclick="location.href='./user.html'">داشبورد</a>
+                            </li>
+                            
+                            <li style="margin-bottom: 15px;">
+                                <a href="#" style="color: var(--color1); text-decoration: none; font-size: 16px;">تماس با ما</a>
+                            </li>
+                        </ul>
+                    </div>
+                `;
+
+                document.body.appendChild(sideMenu);
+
+                // ایجاد overlay برای بستن منو
+                const overlay = document.createElement('div');
+                overlay.id = 'menuOverlay';
+                overlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0,0,0,0.5);
+                    z-index: 999;
+                    display: none;
+                `;
+                overlay.addEventListener('click', toggleMenu);
+                document.body.appendChild(overlay);
+            };
+
+            // ========== تابع باز و بسته کردن منو ==========
+            const toggleMenu = () => {
+                const sideMenu = document.getElementById('sideMenu');
+                const overlay = document.getElementById('menuOverlay');
+                
+                if (menuOpen) {
+                    sideMenu.style.right = '-250px';
+                    overlay.style.display = 'none';
+                    menuOpen = false;
+                } else {
+                    sideMenu.style.right = '0';
+                    overlay.style.display = 'block';
+                    menuOpen = true;
+                }
+            };
+
+            // ========== اضافه کردن event listener به دکمه منو ==========
+            const menuBtn = document.querySelector('.menu-btn');
+            if (menuBtn) {
+                menuBtn.addEventListener('click', toggleMenu);
+            }
+
+            // ایجاد منو در ابتدا
+            createSideMenu();
+
+            // ========== مدیریت کلیدهای میانبر ==========
+            document.addEventListener('keydown', function(e) {
+                // ESC برای بستن منو
+                if (e.key === 'Escape' && menuOpen) {
+                    toggleMenu();
+                }
+            });
+
+        });</script>
+</body>
+</html>

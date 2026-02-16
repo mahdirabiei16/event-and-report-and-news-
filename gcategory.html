@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشکلات رو گزارش کنید - قم من</title>
+    <style>
+        :root {
+            --set1: #0A0A44;
+            --set2: #0D0D5C;
+            --set3: #111178;
+            --set4: #14148F;
+            --set5: #1818AB;
+            --text: #FFFFFF;
+            --terxt2: #000000;
+            --color1: #FFC801;
+            --color2: #EDBE13;
+            --error: #D92D20;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+           font-family: "IRANSans", sans-serif;
+            background-color: var(--set1);
+            min-height: 100vh;
+            direction: rtl;
+        }
+
+        /* Top Navigation Bar - Menu button and logo */
+        .top-nav {
+            background-color: var(--set2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+        }
+
+        .menu-btn {
+            width: 40px;
+            height: 40px;
+            background-color: var(--set2);
+            border: none;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .menu-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text);
+        }
+
+        .app-title {
+            color: var(--text);
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .app-logo {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Secondary Header - Back button */
+        .secondary-header {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            z-index: 10;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background-color: var(--set2);
+            border: none;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text);
+        }
+
+        /* Main Content Section */
+        .main-content {
+            padding: 0 16px 20px;
+        }
+
+        /* Hero Banner Section - Report banner with overlay text */
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            background-color: var(--set2);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(45deg, #808080 25%, transparent 25%),
+                linear-gradient(-45deg, #808080 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #808080 75%),
+                linear-gradient(-45deg, transparent 75%, #808080 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            background-color: #a0a0a0;
+        }
+
+        .banner-text {
+            position: absolute;
+            bottom: 20px;
+            right: 0;
+            left: 0;
+            text-align: center;
+            color: var(--text);
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        /* Categories Section - Report category buttons */
+        .categories-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .category-btn {
+            width: 100%;
+            height: 52px;
+            background-color: var(--set3);
+            border: none;
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+        }
+        .doshogh {
+            color: #EDBE13;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar - Menu button and logo -->
+     <div class="top-nav">
+        <button class="menu-btn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+            </svg>
+        </button>
+        <div class="app-title" onclick="location.href='./main.html'">
+            <span>شهرینو</span>
+            <svg class="app-logo" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <img src="./logo 1.png" alt="">
+            </svg>
+        </div>
+    </div>
+
+
+    <!-- Secondary Header - Back button -->
+    <div class="secondary-header">
+        <button class="back-btn" onclick="history.back()">
+            <svg viewBox="0 0 24 24" class="doshogh" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        
+        <!-- Hero Banner Section - Report banner with overlay text -->
+        <div class="hero-banner">
+            <div class="image-placeholder"><img src="./765301_632.jpg" alt=""></div>
+            <h1 class="banner-text">مشکلات رو گزارش کنید</h1>
+        </div>
+
+        <!-- Categories Section - Report category buttons -->
+        <div class="categories-list">
+            <button onclick="location.href='./gozaresh'" class="category-btn">زیر ساختی ( اب و برق و .... )</button>
+            <button onclick="location.href='./gozaresh'" class="category-btn">زیبایی شهر</button>
+            <button onclick="location.href='./gozaresh'" class="category-btn">راهداری</button>
+            <button onclick="location.href='./gozaresh'"  class="category-btn">سایر</button>
+        </div>
+
+    </div>
+
+</body>
+<script>
+
+               // ========== وقتی صفحه کاملاً بارگذاری شد ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // ========== تنظیمات اولیه ==========
+            let menuOpen = false;
+
+            // ========== ایجاد منوی کشویی ==========
+            const createSideMenu = () => {
+                // ایجاد المان منوی کشویی
+                const sideMenu = document.createElement('div');
+                sideMenu.id = 'sideMenu';
+                sideMenu.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    right: -250px;
+                    width: 250px;
+                    height: 100vh;
+                    background-color: var(--set2);
+                    transition: right 0.3s ease;
+                    z-index: 1000;
+                    box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+                `;
+
+                // محتوای منو
+                sideMenu.innerHTML = `
+                    <div style="padding: 20px;">
+                        <h3 style="color: var(--text); margin-bottom: 30px;">منوی اصلی</h3>
+                        <ul style="list-style: none;">
+                            <li style="margin-bottom: 15px;">
+                                <a href="./main.html" style="color: var(--color1); text-decoration: none; font-size: 16px;">صفحه اصلی</a>
+                            </li>
+
+                            <li style="margin-bottom: 15px;">
+                                <a  style="color: var(--color1); text-decoration: none; font-size: 16px;" onclick="location.href='./user.html'">داشبورد</a>
+                            </li>
+                            
+                            <li style="margin-bottom: 15px;">
+                                <a href="#" style="color: var(--color1); text-decoration: none; font-size: 16px;">تماس با ما</a>
+                            </li>
+                        </ul>
+                    </div>
+                `;
+
+                document.body.appendChild(sideMenu);
+
+                // ایجاد overlay برای بستن منو
+                const overlay = document.createElement('div');
+                overlay.id = 'menuOverlay';
+                overlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0,0,0,0.5);
+                    z-index: 999;
+                    display: none;
+                `;
+                overlay.addEventListener('click', toggleMenu);
+                document.body.appendChild(overlay);
+            };
+
+            // ========== تابع باز و بسته کردن منو ==========
+            const toggleMenu = () => {
+                const sideMenu = document.getElementById('sideMenu');
+                const overlay = document.getElementById('menuOverlay');
+                
+                if (menuOpen) {
+                    sideMenu.style.right = '-250px';
+                    overlay.style.display = 'none';
+                    menuOpen = false;
+                } else {
+                    sideMenu.style.right = '0';
+                    overlay.style.display = 'block';
+                    menuOpen = true;
+                }
+            };
+
+            // ========== اضافه کردن event listener به دکمه منو ==========
+            const menuBtn = document.querySelector('.menu-btn');
+            if (menuBtn) {
+                menuBtn.addEventListener('click', toggleMenu);
+            }
+
+            // ایجاد منو در ابتدا
+            createSideMenu();
+
+            // ========== مدیریت کلیدهای میانبر ==========
+            document.addEventListener('keydown', function(e) {
+                // ESC برای بستن منو
+                if (e.key === 'Escape' && menuOpen) {
+                    toggleMenu();
+                }
+            });
+
+        });</script>
+</html>

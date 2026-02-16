@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جزئیات رویداد - قم من</title>
+    <style>
+        :root {
+            --set1: #0A0A44;
+            --set2: #0D0D5C;
+            --set3: #111178;
+            --set4: #14148F;
+            --set5: #1818AB;
+            --text: #FFFFFF;
+            --terxt2: #000000;
+            --color1: #FFC801;
+            --color2: #EDBE13;
+            --error: #D92D20;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "IRANSans", sans-serif;
+            background-color: var(--set1);
+            min-height: 100vh;
+            direction: rtl;
+        }
+
+        /* Top Navigation Bar - Menu button and logo */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+        }
+
+        .menu-btn {
+            width: 40px;
+            height: 40px;
+            background-color: var(--set2);
+            border: none;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .menu-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text);
+        }
+
+        .app-title {
+            color: var(--text);
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .app-logo {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Main Content Section */
+        .main-content {
+            padding: 0 16px 20px;
+        }
+
+        /* Hero Banner Section - Event cover image with overlay buttons */
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            background-color: var(--set2);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 50px;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(45deg, #808080 25%, transparent 25%),
+                linear-gradient(-45deg, #808080 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #808080 75%),
+                linear-gradient(-45deg, transparent 75%, #808080 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            background-color: #a0a0a0;
+        }
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+        }        /* Back Button - Positioned on banner */
+        .banner-back-btn {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--set3);
+            border: none;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+
+                        position: absolute;
+            top: 12px;
+            left: 12px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--set3);
+            border: none;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .banner-back-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text);
+        }
+
+        /* Share Button - Positioned on banner */
+        .share-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--set3);
+            border: none;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .share-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* Event Avatar - Overlapping banner and content */
+        .event-avatar {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid var(--set1);
+            overflow: hidden;
+            z-index: 3;
+        }
+
+        .event-avatar .image-placeholder {
+            border-radius: 50%;
+        }
+
+        /* Event Title */
+        .event-title {
+            color: var(--text);
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Description Section */
+        .description-section {
+            margin-bottom: 20px;
+        }
+
+        .section-label {
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .description-card {
+              border:solid  var(--set3);
+            background-color: var(--set2);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .description-text {
+            color: var(--text);
+            font-size: 13px;
+            line-height: 1.8;
+            text-align: right;
+        }
+
+        /* Location Section */
+        .location-section {
+            margin-bottom: 20px;
+        }
+
+        .location-card {
+            background-color: var(--set2);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            border:solid  var(--set3);
+           
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .location-icon {
+            width: 48px;
+            height: 48px;
+            stroke: var(--text);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .location-text {
+            color: var(--text);
+            font-size: 13px;
+            text-align: center;
+        }
+
+        /* Info Section - Date and Contact */
+        .info-section {
+            
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .info-item {
+            
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .info-label {
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .info-value {
+            background-color: var(--set2);
+            border-radius: 10px;
+            padding: 14px 16px;
+            color: var(--text);
+            font-size: 14px;
+            text-align: left;
+            direction: ltr;
+        }
+        .event-title {
+            margin-top: -30px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar - Menu button and logo -->
+    <div class="top-nav">
+        <button class="menu-btn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+            </svg>
+        </button>
+        <div class="app-title" onclick="location.href='./main.html'">
+            <span>شهرینو</span>
+            <svg class="app-logo" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <img src="./logo 1.png" alt="">
+            </svg>
+        </div>
+    </div>
+
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        
+        <!-- Hero Banner Section - Event cover image with overlay buttons -->
+        <div class="hero-banner" dir="rtl">
+            <div class="image-placeholder">
+                <img src="./7b9491a4-d3e2-47c9-9aa9-22357663843b.webp" alt=""> 
+            </div>
+            <button class="share-btn" onclick="shareEvent()">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="18" cy="5" r="3"/>
+                    <circle cx="6" cy="12" r="3"/>
+                    <circle cx="18" cy="19" r="3"/>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                </svg>
+            </button>
+            <!-- Back Button -->
+            <button class="banner-back-btn " onclick="history.back()">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+            </button>
+            
+            <!-- Share Button -->
+ 
+            
+            <!-- Event Avatar -->
+
+        </div>
+
+        <!-- Event Title -->
+        <h1 class="event-title">جمکران</h1>
+
+        <!-- Description Section -->
+        <div class="description-section">
+            <label class="section-label">توضیحات رویداد</label>
+            <div class="description-card">
+                <p class="description-text">
+                    این رویداد به مناسبت شب رمضان برگزار میشود و یکی از مهم ترین رویداد های شهر قم هست و پذیرایی مسافرین عزیز است
+                </p>
+            </div>
+        </div>
+
+        <!-- Location Section -->
+        <div class="location-section">
+            <label class="section-label">موقعیت رویداد</label>
+            <div class="location-card">
+                <svg class="location-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <p class="location-text">برای مشاهده موقعیت رویداد کلیک کنید</p>
+            </div>
+        </div>
+
+        <!-- Info Section - Date and Contact -->
+        <div class="info-section">
+            
+            <!-- Date -->
+            <div class="info-item">
+                <label class="info-label">تاریخ برگزاری رویداد</label>
+                <div class="info-value">1404/4/03</div>
+            </div>
+
+            <!-- Contact -->
+            <div class="info-item">
+                <label class="info-label">شماره تماس</label>
+                <div class="info-value">09105476971</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        // Share functionality
+        function shareEvent() {
+            const shareData = {
+                title: 'جمعه کران',
+                text: 'این رویداد به مناسبت شب رمضان برگزار میشود',
+                url: window.location.href
+            };
+
+            if (navigator.share) {
+                navigator.share(shareData)
+                    .then(() => console.log('Shared successfully'))
+                    .catch((error) => console.log('Error sharing:', error));
+            } else {
+                // Fallback: Copy link to clipboard
+                navigator.clipboard.writeText(window.location.href)
+                    .then(() => alert('لینک کپی شد!'))
+                    .catch(() => alert('اشتراک گذاری در این دستگاه پشتیبانی نمی‌شود'));
+            }
+        }
+
+
+
+
+
+
+        
+    </script>
+<script>
+
+               // ========== وقتی صفحه کاملاً بارگذاری شد ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // ========== تنظیمات اولیه ==========
+            let menuOpen = false;
+
+            // ========== ایجاد منوی کشویی ==========
+            const createSideMenu = () => {
+                // ایجاد المان منوی کشویی
+                const sideMenu = document.createElement('div');
+                sideMenu.id = 'sideMenu';
+                sideMenu.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    right: -250px;
+                    width: 250px;
+                    height: 100vh;
+                    background-color: var(--set2);
+                    transition: right 0.3s ease;
+                    z-index: 1000;
+                    box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+                `;
+
+                // محتوای منو
+                sideMenu.innerHTML = `
+                    <div style="padding: 20px;">
+                        <h3 style="color: var(--text); margin-bottom: 30px;">منوی اصلی</h3>
+                        <ul style="list-style: none;">
+                            <li style="margin-bottom: 15px;">
+                                <a href="./main.html" style="color: var(--color1); text-decoration: none; font-size: 16px;">صفحه اصلی</a>
+                            </li>
+
+                            <li style="margin-bottom: 15px;">
+                                <a  style="color: var(--color1); text-decoration: none; font-size: 16px;" onclick="location.href='./user.html'">داشبورد</a>
+                            </li>
+                            
+                            <li style="margin-bottom: 15px;">
+                                <a href="#" style="color: var(--color1); text-decoration: none; font-size: 16px;">تماس با ما</a>
+                            </li>
+                        </ul>
+                    </div>
+                `;
+
+                document.body.appendChild(sideMenu);
+
+                // ایجاد overlay برای بستن منو
+                const overlay = document.createElement('div');
+                overlay.id = 'menuOverlay';
+                overlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0,0,0,0.5);
+                    z-index: 999;
+                    display: none;
+                `;
+                overlay.addEventListener('click', toggleMenu);
+                document.body.appendChild(overlay);
+            };
+
+            // ========== تابع باز و بسته کردن منو ==========
+            const toggleMenu = () => {
+                const sideMenu = document.getElementById('sideMenu');
+                const overlay = document.getElementById('menuOverlay');
+                
+                if (menuOpen) {
+                    sideMenu.style.right = '-250px';
+                    overlay.style.display = 'none';
+                    menuOpen = false;
+                } else {
+                    sideMenu.style.right = '0';
+                    overlay.style.display = 'block';
+                    menuOpen = true;
+                }
+            };
+
+            // ========== اضافه کردن event listener به دکمه منو ==========
+            const menuBtn = document.querySelector('.menu-btn');
+            if (menuBtn) {
+                menuBtn.addEventListener('click', toggleMenu);
+            }
+
+            // ایجاد منو در ابتدا
+            createSideMenu();
+
+            // ========== مدیریت کلیدهای میانبر ==========
+            document.addEventListener('keydown', function(e) {
+                // ESC برای بستن منو
+                if (e.key === 'Escape' && menuOpen) {
+                    toggleMenu();
+                }
+            });
+
+        });</script>
+</body>
+</html>

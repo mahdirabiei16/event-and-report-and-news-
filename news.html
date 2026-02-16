@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اخبار - قم من</title>
+    <style>
+        :root {
+            --set1: #0A0A44;
+            --set2: #0D0D5C;
+            --set3: #111178;
+            --set4: #14148F;
+            --set5: #1818AB;
+            --text: #FFFFFF;
+            --terxt2: #000000;
+            --color1: #FFC801;
+            --color2: #EDBE13;
+            --error: #D92D20;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+           font-family: "IRANSans", sans-serif;
+            background-color: var(--set1);
+            min-height: 100vh;
+            direction: rtl;
+        }
+
+        /* Top Navigation Bar - Menu button and logo */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+        }
+
+        .menu-btn {
+            width: 40px;
+            height: 40px;
+            background-color: var(--set2);
+            border: none;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .menu-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text);
+        }
+
+        .app-title {
+            color: var(--text);
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .app-logo {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Secondary Header - Back button and page title */
+        .secondary-header {
+            display: flex;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 16px 16px;
+            gap: 12px;
+        }
+
+        .back-btn {
+            width: 36px;
+            height: 36px;
+            background-color: var(--set2);
+            border: none;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .back-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--text);
+        }
+
+        .page-title {
+            color: var(--text);
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Main Content Section */
+        .main-content {
+            padding: 0 16px 20px;
+        }
+
+        /* Blog List Section */
+        .blog-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Blog Card - Individual blog post item */
+        .blog-card {
+            background-color: var(--set2);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Blog Image - Featured image placeholder */
+        .blog-image {
+            width: 100%;
+            height: 140px;
+            background-color: var(--set3);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(45deg, #808080 25%, transparent 25%),
+                linear-gradient(-45deg, #808080 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #808080 75%),
+                linear-gradient(-45deg, transparent 75%, #808080 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            background-color: #a0a0a0;
+        }
+
+        .blog-title {
+            color: var(--text);
+            font-size: 16px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .blog-description {
+            color: var(--text);
+            font-size: 13px;
+            line-height: 1.6;
+            text-align: right;
+            opacity: 0.9;
+        }
+
+        /* Blog Footer - View button and date */
+        .blog-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4px;
+        }
+
+        .view-btn {
+            width: 40px;
+            height: 40px;
+            background-color: var(--set3);
+            border: none;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .view-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .blog-date {
+            color: var(--text);
+            font-size: 13px;
+            opacity: 0.9;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+    <!-- Top Navigation Bar - Menu button and logo -->
+      <div class="top-nav">
+        <button class="menu-btn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+            </svg>
+        </button>
+        <div class="app-title" onclick="location.href='./main.html'">
+            <span>شهرینو</span>
+            <svg class="app-logo" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <img src="./logo 1.png" alt="">
+            </svg>
+        </div>
+    </div>
+
+
+    <!-- Secondary Header - Back button and page title -->
+    <div class="secondary-header"><h1 class="page-title">خبر ها </h1>
+        <button class="back-btn" onclick="history.back()">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+        </button>
+        
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        
+        <!-- Blog List Section -->
+        <div class="blog-list">
+            
+            <!-- Blog Card 1 -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <div class="image-placeholder"></div>
+                </div>
+                <h3 class="blog-title">متن نمونه</h3>
+                <p class="blog-description">
+                    متن نمونه متن نمونه متن نمونه متن نمونه متن نمونه متن نمونه متن نمونه متن نمونه متن نمونه
+                </p>
+                <div class="blog-footer">
+                    <button class="view-btn">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="12" r="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <span class="blog-date">1405/02/14</span>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+    </div>
+<script>
+
+               // ========== وقتی صفحه کاملاً بارگذاری شد ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // ========== تنظیمات اولیه ==========
+            let menuOpen = false;
+
+            // ========== ایجاد منوی کشویی ==========
+            const createSideMenu = () => {
+                // ایجاد المان منوی کشویی
+                const sideMenu = document.createElement('div');
+                sideMenu.id = 'sideMenu';
+                sideMenu.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    right: -250px;
+                    width: 250px;
+                    height: 100vh;
+                    background-color: var(--set2);
+                    transition: right 0.3s ease;
+                    z-index: 1000;
+                    box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+                `;
+
+                // محتوای منو
+                sideMenu.innerHTML = `
+                    <div style="padding: 20px;">
+                        <h3 style="color: var(--text); margin-bottom: 30px;">منوی اصلی</h3>
+                        <ul style="list-style: none;">
+                            <li style="margin-bottom: 15px;">
+                                <a href="./main.html" style="color: var(--color1); text-decoration: none; font-size: 16px;">صفحه اصلی</a>
+                            </li>
+
+                            <li style="margin-bottom: 15px;">
+                                <a href="./user.html" style="color: var(--color1); text-decoration: none; font-size: 16px;" onclick="location.href='./user.html'">داشبورد</a>
+                            </li>
+                            
+                            <li style="margin-bottom: 15px;">
+                                <a href="#" style="color: var(--color1); text-decoration: none; font-size: 16px;">تماس با ما</a>
+                            </li>
+                        </ul>
+                    </div>
+                `;
+
+                document.body.appendChild(sideMenu);
+
+                // ایجاد overlay برای بستن منو
+                const overlay = document.createElement('div');
+                overlay.id = 'menuOverlay';
+                overlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0,0,0,0.5);
+                    z-index: 999;
+                    display: none;
+                `;
+                overlay.addEventListener('click', toggleMenu);
+                document.body.appendChild(overlay);
+            };
+
+            // ========== تابع باز و بسته کردن منو ==========
+            const toggleMenu = () => {
+                const sideMenu = document.getElementById('sideMenu');
+                const overlay = document.getElementById('menuOverlay');
+                
+                if (menuOpen) {
+                    sideMenu.style.right = '-250px';
+                    overlay.style.display = 'none';
+                    menuOpen = false;
+                } else {
+                    sideMenu.style.right = '0';
+                    overlay.style.display = 'block';
+                    menuOpen = true;
+                }
+            };
+
+            // ========== اضافه کردن event listener به دکمه منو ==========
+            const menuBtn = document.querySelector('.menu-btn');
+            if (menuBtn) {
+                menuBtn.addEventListener('click', toggleMenu);
+            }
+
+            // ایجاد منو در ابتدا
+            createSideMenu();
+
+            // ========== مدیریت کلیدهای میانبر ==========
+            document.addEventListener('keydown', function(e) {
+                // ESC برای بستن منو
+                if (e.key === 'Escape' && menuOpen) {
+                    toggleMenu();
+                }
+            });
+
+        });</script>
+</body>
+</html>
